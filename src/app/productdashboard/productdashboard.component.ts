@@ -9,73 +9,75 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./productdashboard.component.css']
 })
 export class ProductdashboardComponent implements OnInit {
-  // id: any;
-  // name: any;
-  // brand: any;
-  // price: any;
-  // isLoading:false|any
+  id: any;
+  name: any;
+  brand: any;
+  price: any;
+  isLoading:false|any
+  error: string | undefined;
+  message: any;
 
   constructor( private daisy:ProductdetailsService,
     private route:Router) { }
 
 
   ngOnInit(): void {
-    // this.isLoading=true;
+    this.isLoading=true;
   }
-//   addTheProduct(){
-//     let newObj ={
-//       id:this.id,
-//       productName:this.name,
-//       productBrand:this.brand,
-//       productPrice:this.price
-//     }
-//     console.log(newObj);
+  addTheProduct(){
+    let newObj ={
+      id:this.id,
+      productName:this.name,
+      productBrand:this.brand,
+      productPrice:this.price
+    }
+    console.log(newObj);
     
-//     this.daisy.getAllProducts(newObj).subscribe((res:any)=>{
-//       console.log(res);
+    this.daisy.getAllProducts(newObj).subscribe((res:any)=>{
+      console.log(res);
       
-//     })
-//   }
+    })
+  }
 
-//   updateTheProduct(){
-//     let newObj ={
-//       id:this.id,
-//       productName:this.name,
-//       productBrand:this.brand,
-//       productPrice:this.price
-//     }
-//     console.log(newObj);
+  updateTheProduct(){
+    let newObj ={
+      id:this.id,
+      productName:this.name,
+      productBrand:this.brand,
+      productPrice:this.price
+    }
+    console.log(newObj);
     
-//     this.daisy.putProducts(this.id,newObj).subscribe((res:any)=>{
-//       console.log(res);
+    this.daisy.putProducts(this.id,newObj).subscribe((res:any)=>{
+      console.log(res);
       
-//     })
-//   }
-//   deleteTheProduct(){
-//     this.daisy.deleteProducts(this.id).subscribe((res:any)=>{
-//       console.log(res);
+    })
+  }
+  deleteTheProduct(){
+    this.daisy.deleteProducts(this.id).subscribe((res:any)=>{
+      console.log(res);
       
 
-//     })
-//   }
-//   onSubmit(form:NgForm){
-//     // this.isLoading = true; 
-//     this.daisy.onRegister(form.value).subscribe((res:any) => {
-//       console.log(res);
+    })
+  }
+  onSubmit(form:NgForm){
+    this.isLoading = true; 
+    this.daisy.onRegister(form.value).subscribe((res:any) => {
+      console.log(res);
       
-//     //   this.isLoading = false;
-//     //   this.message = res.message;
-//     //   form.reset();
-//     // },(err: any) => {
-//     //   console.log(err);
+      this.isLoading = false;
+      this.message = res.message;
+      form.reset();
+    },(err: any) => {
+      console.log(err);
       
-//     //   this.isLoading = false;     
-//     //   this.error = "Something went wrong"
-//     this.route.navigate(['home'])
-//     form.reset();
-//     })
+      this.isLoading = false;     
+      this.error = "Something went wrong"
+    this.route.navigate(['home'])
+    form.reset();
+    })
    
   
-// }
+}
 
 }
